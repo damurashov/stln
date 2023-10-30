@@ -29,7 +29,7 @@ target_link_options(stm32f411re PUBLIC "SHELL:${LINKER_OPTIONS}")
 # Specify compiler options
 string(JOIN " " COMPILE_OPTIONS
 	"-mthumb"  # Use thumb code
-	"-mcpu=cortex-m3"  # Specify CPU architecture
+	"-mcpu=cortex-m4"  # Specify CPU architecture
 )
 
 if (${BUILD_TYPE} STREQUAL "Debug")
@@ -39,9 +39,7 @@ if (${BUILD_TYPE} STREQUAL "Debug")
 	)
 endif()
 
-if (USE_STM32CUBEF4_LIBRARY)
-	target_link_libraries(stm32f411re PRIVATE stm32cubef4)
-endif()
+target_link_libraries(stm32f411re PRIVATE stm32cubef4)
 
 message(STATUS "Using compiler options: `${COMPILE_OPTIONS}`")
 target_compile_options(stm32f411re PUBLIC "SHELL:${COMPILE_OPTIONS}")
