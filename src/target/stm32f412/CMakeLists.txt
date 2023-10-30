@@ -29,7 +29,7 @@ target_link_options(stm32f412 PUBLIC "SHELL:${LINKER_OPTIONS}")
 # Specify compiler options
 string(JOIN " " COMPILE_OPTIONS
 	"-mthumb"  # Use thumb code
-	"-mcpu=cortex-m3"  # Specify CPU architecture
+	"-mcpu=cortex-m4"  # Specify CPU architecture
 )
 
 if (${BUILD_TYPE} STREQUAL "Debug")
