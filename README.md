@@ -8,6 +8,10 @@ Prerequisites:
 
 - [Non-EABI ARM GCC toolchain](https://developer.arm.com/downloads/-/gnu-rm)
 
+Optional
+
+- [QEMU xPack](https://xpack.github.io/dev-tools/qemu-arm/install/)
+
 ### Process
 
 Set environment path so it includes the downloaded toolchain
