@@ -10,7 +10,7 @@ Prerequisites:
 
 ### Process
 
-Set environment library to the downloaded toolchain
+Set environment path so it includes the downloaded toolchain
 
 ```bash
 export PATH=<PATH-TO-GCC>:$PATH
