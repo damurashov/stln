@@ -7,6 +7,8 @@
 Prerequisites:
 
 - [Non-EABI ARM GCC toolchain](https://developer.arm.com/downloads/-/gnu-rm)
+- GNU Make
+- CMake>=V3.12
 
 Optional
 
@@ -30,6 +32,8 @@ Available targets
 
 - `stm32f407zg`
 - `stm32f412`
+
+Run 
 
 # Debugging under QEMU
 
