@@ -16,7 +16,7 @@ SIZE = arm-none-eabi-size
 build:
 	mkdir -p build && \
 		cd build && \
-		cmake -DBUILD_TYPE=$(BUILD_TYPE) .. && \
+		cmake -DBUILD_TYPE=$(BUILD_TYPE) -DUSE_STM32F411RE_TARGET=ON .. && \
 		make -j$$(nproc)
 	$(SIZE) $(BUILD_ELF_PATH)
 .PHONY: build

@@ -36,5 +36,17 @@ else()
 	message(FATAL_ERROR "No toolchain has been specified")
 endif()
 
+# Define linked libraries
+
+set(APPLICATION_TARGET_LIBRARIES "")
+
+if(USE_STM32F412_TARGET)
+	message(STATUS "Using STM32F412")
+	list(APPEND APPLICATION_TARGET_LIBRARIES "stm32f412")
+elseif(USE_STM32F411RE_TARGET)
+	message(STATUS "Using STM32F411RE")
+	list(APPEND APPLICATION_TARGET_LIBRARIES "stm32f411re")
+endif()
+
 add_subdirectory(lib)
 add_subdirectory(src)
