@@ -34,7 +34,7 @@ defaultIsrHandler:
 .global gStm32VectorTable
 .section .vector_table, "a" /* Allocatable section */, %progbits /* Executable code */
 .type gStm32VectorTable, %object /* Data object */
-.size gStm32VectorTable, 0x0188  /* Refer to RM0090, rev. 19, page 375 */
+.size gStm32VectorTable, 0x1098  /* Refer to RM0383, rev. 3, page 204 */
 gStm32VectorTable:
 	.word gMspInitial
 	.word resetIsr
