@@ -1,6 +1,5 @@
 .syntax unified
 .cpu cortex-m4
-.fpu hardfp
 .thumb
 
 /*
@@ -35,7 +34,7 @@ defaultIsrHandler:
 .global gStm32VectorTable
 .section .vector_table, "a" /* Allocatable section */, %progbits /* Executable code */
 .type gStm32VectorTable, %object /* Data object */
-.size gStm32VectorTable, .-gStm32VectorTable
+.size gStm32VectorTable, 0x03FC /* For STM32F412 vector table size, please refer to PM0214, page 40 */
 gStm32VectorTable:
 	.word gMspInitial
 	.word resetIsr
