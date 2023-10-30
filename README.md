@@ -30,7 +30,7 @@ export USE_<TARGET_NAME>_TARGET=1
 
 Available targets
 
-- `stm32f411CC`
+- `stm32f411RE`
 - `stm32f412`
 
 Run 
@@ -43,12 +43,12 @@ distribution does not support STM32F412xx. Use
 disto instead. [This fella](https://aperles.blogs.upv.es/2020/04/15/simulation-emulation-of-the-stm32f4-discovery-board/)
 provides somewhat satisfactory manual that might give one some hints.
 
-## STM32F411CC
+## STM32F411RE
 
 QEMU (neither xPack, nor the official one) does not provide support for
 STM32F412. In fact, there is only a few STM32 MCUs supported by the either QEMU
 release. So this project can be debugged w/ QEMU on a
 [close enough](https://www.st.com/en/microcontrollers-microprocessors/stm32f4-series.html)
-STM32F411CC
+STM32F411RE
 and then, hopefully, successfully ported onto STM32F412.
 
