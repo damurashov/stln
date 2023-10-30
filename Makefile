@@ -2,10 +2,10 @@
 BUILD_TYPE ?= Debug
 
 # Output ELF file path
-BUILD_ELF_PATH = build/src/application
+BUILD_ELF_PATH = build/src/common/application
 
 # Output binary image path
-OUTPUT_BINARY_IMAGE_PATH = build/src/application.bin
+OUTPUT_BINARY_IMAGE_PATH = build/src/common/application.bin
 
 # GCC toolchain
 OBJDUMP = arm-none-eabi-objdump
