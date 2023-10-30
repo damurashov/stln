@@ -2,10 +2,10 @@
 file(GLOB SOURCES "./*.c" "./*.s")
 
 # Build the library
-add_library(stm32f401re STATIC ${SOURCES})
+add_library(stm32f411re STATIC ${SOURCES})
 
 # Set linker script
-get_filename_component(LINKER_SCRIPT_PATH "./stm32f401re.ld" REALPATH)
+get_filename_component(LINKER_SCRIPT_PATH "./stm32f411re.ld" REALPATH)
 
 # Specify linker options
 string(JOIN " " LINKER_OPTIONS
@@ -24,7 +24,7 @@ if (${BUILD_TYPE} STREQUAL "Debug")
 endif()
 
 message(STATUS "Using linker options: `${LINKER_OPTIONS}`")
-target_link_options(stm32f401re PUBLIC "SHELL:${LINKER_OPTIONS}")
+target_link_options(stm32f411re PUBLIC "SHELL:${LINKER_OPTIONS}")
 
 # Specify compiler options
 string(JOIN " " COMPILE_OPTIONS
@@ -40,10 +40,10 @@ if (${BUILD_TYPE} STREQUAL "Debug")
 endif()
 
 if (USE_STM32CUBEF4_LIBRARY)
-	target_link_libraries(stm32f401re PRIVATE stm32cubef4)
+	target_link_libraries(stm32f411re PRIVATE stm32cubef4)
 endif()
 
 message(STATUS "Using compiler options: `${COMPILE_OPTIONS}`")
-target_compile_options(stm32f401re PUBLIC "SHELL:${COMPILE_OPTIONS}")
-set_target_properties(stm32f401re PROPERTIES LINKER_LANGUAGE C)
-target_include_directories(stm32f401re PRIVATE ${COMMON_INCLUDE_DIRECTORIES})
+target_compile_options(stm32f411re PUBLIC "SHELL:${COMPILE_OPTIONS}")
+set_target_properties(stm32f411re PROPERTIES LINKER_LANGUAGE C)
+target_include_directories(stm32f411re PRIVATE ${COMMON_INCLUDE_DIRECTORIES})
