@@ -20,7 +20,9 @@ void targetInitializeClock()
 	// Use HSI as the system clock source
 	RCC->CFGR |= RCC_CFGR_SW_HSI;
 
-	// Enable peripherals on AHB1
+	// Enable peripherals
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;  // Enable GPIO A (USART 2)
-	RCC->AHB2ENR |= RCC_AHB2ENR_RNGEN;
+	RCC->AHB2ENR |= RCC_AHB2ENR_RNGEN;  // Enable random number generator
+	RCC->APB1ENR |= RCC_APB1ENR_USART2EN  // Enable USART 2
+		| RCC_APB1ENR_TIM2EN;  // Enable TIM 2
 }
