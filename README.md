@@ -48,7 +48,7 @@ provides somewhat satisfactory manual that might give one some hints.
 QEMU (neither xPack, nor the official one) does not provide support for
 STM32F412. In fact, there is only a few STM32 MCUs supported by the either QEMU
 release. So this project can be debugged w/ QEMU on a
-"[close enough"](https://www.st.com/en/microcontrollers-microprocessors/stm32f4-series.html)
+[close enough](https://www.st.com/en/microcontrollers-microprocessors/stm32f4-series.html)
 STM32F411CC
 and then, hopefully, successfully ported onto STM32F412.
 
