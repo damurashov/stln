@@ -16,7 +16,7 @@ Set environment path so it includes the downloaded toolchain
 export PATH=<PATH-TO-GCC>:$PATH
 ```
 
-Set the target name you want to build the project for
+Specify the target you want to build the project for
 
 ```bash
 export USE_<TARGET_NAME>_TARGET=1
@@ -37,8 +37,8 @@ provides somewhat satisfactory manual that might give one some hints.
 
 ## STM32F407ZG
 
-QEMU does not provide support for STM32F412. In fact, there is only a few STM32
-MCUs supported by the official QEMU release. This project can be debugged w/
-QEMU on a "close enough" STM32F407ZG and then, hopefully, successfully ported
-onto STM32F412.
+QEMU (neither xPack, nor the official one) does not provide support for
+STM32F412. In fact, there is only a few STM32 MCUs supported by the either QEMU
+release. So this project can be debugged w/ QEMU on a "close enough" STM32F407ZG
+and then, hopefully, successfully ported onto STM32F412.
 
