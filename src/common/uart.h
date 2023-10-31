@@ -20,10 +20,9 @@ enum UartStopBitLength {
 	UartStopBitLength0p5,
 };
 
-
 /// \brief Performs UART initialization
-/// \param `aUse9BitWord`: see `UartWordLength`
-/// \param `aUse9BitWord`: see `UartStopBitLength`
-unsigned uartInitialize(int aBaudrate, unsigned aUse9BitWord, unsigned aUse2StopBits);
+/// \param `aUartWordLength`: see `UartWordLength`
+/// \param `aUartStopBitLength`: see `UartStopBitLength`
+void uartInitialize(unsigned long aBaudrate, unsigned aUartWordLength, unsigned aUartStopBitLength);
 
 #endif // COMMON_UART_H_
