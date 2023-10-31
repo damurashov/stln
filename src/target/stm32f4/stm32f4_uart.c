@@ -13,6 +13,19 @@
 static UartIsrHook sUartIsrHook = 0;
 static USART_TypeDef *sUsartRegisters = USART2;
 
+/// \brief Overrides `stm32f412_startup.s`
+void gUsart2Isr()
+{
+	USART_TypeDef *usart = sUsartRegisters;
+	unsigned char nextCharacter;
+
+	if (sUartIsrHook != 0 && sUartIsrHook(&nextCharacter)) {
+		usart->DR = nextCharacter;
+	} else {
+		uartDisableFromIsr();
+	}
+}
+
 /// \brief Initializes UART2
 /// \pre Clocking is supposed to be initialized
 /// \pre UART2 is supposed to be enabled in CCR
