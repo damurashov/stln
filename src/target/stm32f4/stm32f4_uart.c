@@ -10,12 +10,15 @@
 #include "uart.h"
 #include <stm32f412cx.h>  // Not supposed to matter which platform is used within F4 lineage
 
+static UartIsrHook sUartIsrHook = 0;
+static USART_TypeDef *sUsartRegisters = USART2;
+
 /// \brief Initializes UART2
 /// \pre Clocking is supposed to be initialized
 /// \pre UART2 is supposed to be enabled in CCR
 void uartInitialize(unsigned long aBaudrate, unsigned aUartWordLength, unsigned aUartStopBitLength)
 {
-	USART_TypeDef *usart = USART2;
+	USART_TypeDef *usart = sUsartRegisters;
 	usart->CR1 |= USART_CR1_TXEIE;  // Enable "TX empty" interrupt
 
 	// Configure word length
@@ -55,4 +58,23 @@ void uartInitialize(unsigned long aBaudrate, unsigned aUartWordLength, unsigned 
 			* (usartDivf - (float)mantissa));
 		usart->BRR = (mantissa << 4) | fraction;
 	}
+}
+
+void uartSetIsrHook(UartIsrHook aUartIsrHook)
+{
+	sUartIsrHook = aUartIsrHook;
+}
+
+void uartEnableFromIsr()
+{
+	USART_TypeDef *usart = sUsartRegisters;
+	usart->CR1 |= USART_CR1_TXEIE  // Enable transmission
+		| USART_CR1_TE;  // Enable usart interrupt on empty transmission buffer
+}
+
+void uartDisableFromIsr()
+{
+	USART_TypeDef *usart = sUsartRegisters;
+	usart->CR1 &= ~(USART_CR1_TXEIE  // Enable transmission
+		| USART_CR1_TE);  // Enable usart interrupt on empty transmission buffer
 }
