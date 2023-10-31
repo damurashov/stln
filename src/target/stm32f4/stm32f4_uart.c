@@ -6,8 +6,8 @@
 //
 // Implements UART configuration routines
 
-#include "uart.h"
 #include "target_stm32f4.h"
+#include "uart.h"
 #include <stm32f412cx.h>  // Not supposed to matter which platform is used within F4 lineage
 
 /// \brief Initializes UART2
