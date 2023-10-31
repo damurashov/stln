@@ -1,3 +1,4 @@
 .tempmsg
 build/
 .vscode
+*CMakeLists.txt.user
