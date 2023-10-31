@@ -40,7 +40,7 @@ if (${BUILD_TYPE} STREQUAL "Debug")
 endif()
 
 if (USE_STM32CUBEF4_LIBRARY)
-	target_link_libraries(stm32f412 PRIVATE stm32cubef4)
+	target_link_libraries(stm32f412 PRIVATE stm32cubef4 stm32f4)
 endif()
 
 message(STATUS "Using compiler options: `${COMPILE_OPTIONS}`")
