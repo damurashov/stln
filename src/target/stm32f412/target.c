@@ -6,7 +6,14 @@
 //
 // Implements "target.h" API
 
+#include "target_stm32f4.h"
 #include <stm32f412cx.h>
+
+unsigned long long targetStm32f4GetUartClockFrequencyHz()
+{
+	// A direct clock from HSI was used
+	return TARGET_STM32F4_HSI_FREQUENCY_HZ;
+}
 
 void targetInitializeClock()
 {
