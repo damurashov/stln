@@ -30,7 +30,7 @@ void targetStm32f4InitializeRng()
 	rng->CR |= RNG_CR_RNGEN;  // enable
 }
 
-void targetInitializeClock()
+void targetStm32f4InitializeClock()
 {
 	// Enable HSI clock source
 	volatile RCC_TypeDef *rcc = RCC;
@@ -49,4 +49,10 @@ void targetInitializeClock()
 	rcc->AHB2ENR |= RCC_AHB2ENR_RNGEN;  // Enable random number generator
 	rcc->APB1ENR |= RCC_APB1ENR_USART2EN  // Enable USART 2
 		| RCC_APB1ENR_TIM2EN;  // Enable TIM 2
+}
+
+void targetUp()
+{
+	targetStm32f4InitializeClock();
+	targetStm32f4InitializeRng();
 }
