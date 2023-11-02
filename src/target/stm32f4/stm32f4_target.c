@@ -22,6 +22,14 @@ unsigned long targetStm32f4GetUartClockFrequencyHz()
 	return TARGET_STM32F4_HSI_FREQUENCY_HZ;
 }
 
+void targetStm32f4InitializeRng()
+{
+	volatile RNG_TypeDef *rng = RNG;
+
+	// Enable RNG
+	rng->CR |= RNG_CR_RNGEN;  // enable
+}
+
 void targetInitializeClock()
 {
 	// Enable HSI clock source

@@ -14,4 +14,6 @@
 /// \brief returns UART clock frequency as it is configured in RCC
 unsigned long targetStm32f4GetUartClockFrequencyHz();
 
+void targetStm32f4InitializeRng();
+
 #endif // TARGET_STM32F4_TARGET_STM32F4_H_
