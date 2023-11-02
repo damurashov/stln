@@ -34,7 +34,10 @@ disassemble:
 disassemble_all:
 	$(OBJDUMP) -Dt $(BUILD_ELF_PATH)
 
-image:
+image: build
 	@echo Prepare image for uploading onto target
 	$(OBJCOPY) -O binary $(BUILD_ELF_PATH) $(OUTPUT_BINARY_IMAGE_PATH)
 	@echo Saved output binary at $(OUTPUT_BINARY_IMAGE_PATH)
+
+run_qemu: image
+	bash tools/run_qemu.sh
