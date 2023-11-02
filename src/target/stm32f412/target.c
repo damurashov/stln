@@ -19,10 +19,11 @@ void targetInitializeClock()
 {
 	// Enable HSI clock source
 	volatile RCC_TypeDef *rcc = RCC;
-	rcc->CR |= RCC_CR_HSION;
+	rcc->CR |= RCC_CR_HSION  // Enable HSI
+		| RCC_CR_PLLON;  // Enable PLL (for RNG)
 
-	// Busy-wait until HSI is ready
-	while (!(rcc->CR & RCC_CR_HSIRDY)) {
+	// Busy-wait until HSI and PLL are ready
+	while (!((rcc->CR & RCC_CR_HSIRDY) && (rcc->CR & RCC_CR_PLLRDY))) {
 	}
 
 	// Use HSI as the system clock source
