@@ -31,7 +31,7 @@ void gUsart2Isr()
 /// \pre UART2 is supposed to be enabled in CCR
 void uartInitialize(unsigned long aBaudrate, unsigned aUartWordLength, unsigned aUartStopBitLength)
 {
-	USART_TypeDef *usart = sUsartRegisters;
+	volatile USART_TypeDef *usart = sUsartRegisters;
 	usart->CR1 |= USART_CR1_TXEIE;  // Enable "TX empty" interrupt
 
 	// Configure word length
@@ -80,14 +80,14 @@ void uartSetIsrHook(UartIsrHook aUartIsrHook)
 
 void uartEnableFromIsr()
 {
-	USART_TypeDef *usart = sUsartRegisters;
+	volatile USART_TypeDef *usart = sUsartRegisters;
 	usart->CR1 |= USART_CR1_TXEIE  // Enable transmission
 		| USART_CR1_TE;  // Enable usart interrupt on empty transmission buffer
 }
 
 void uartDisableFromIsr()
 {
-	USART_TypeDef *usart = sUsartRegisters;
+	volatile USART_TypeDef *usart = sUsartRegisters;
 	usart->CR1 &= ~(USART_CR1_TXEIE  // Enable transmission
 		| USART_CR1_TE);  // Enable usart interrupt on empty transmission buffer
 }
