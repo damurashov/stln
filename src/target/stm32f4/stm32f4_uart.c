@@ -6,7 +6,7 @@
 //
 // Implements UART configuration routines
 
-#include "target_stm32f4.h"
+#include "stm32f4_target.h"
 #include "uart.h"
 #include <stm32f412cx.h>  // Not supposed to matter which platform is used within F4 lineage
 
