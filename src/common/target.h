@@ -10,6 +10,6 @@
 #define COMMON_TARGET_H_
 
 /// \brief performs basic clock initialization, brings up peripherals
-void targetInitializeClock();
+void targetUp();
 
 #endif  // COMMON_TARGET_H_
