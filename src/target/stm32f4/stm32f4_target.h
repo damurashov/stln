@@ -12,6 +12,6 @@
 #define TARGET_STM32F4_HSI_FREQUENCY_HZ (16000000)
 
 /// \brief returns UART clock frequency as it is configured in RCC
-unsigned long long targetStm32f4GetUartClockFrequencyHz();
+unsigned long targetStm32f4GetUartClockFrequencyHz();
 
 #endif // TARGET_STM32F4_TARGET_STM32F4_H_
