@@ -9,7 +9,14 @@
 #include "target_stm32f4.h"
 #include <stm32f412cx.h>
 
-unsigned long long targetStm32f4GetUartClockFrequencyHz()
+#define PLLM_SOURCE_FREQUENCY (TARGET_STM32F4_HSI_FREQUENCY_HZ)
+#define PLLM_FREQUENCY_DIVISION_FACTOR (2)
+
+#if PLLM_FREQUENCY_DIVISION_FACTOR != 2
+#error Unsupported configuration
+#endif  /* PLLM_FREQUENCY_DIVISION_FACTOR */
+
+unsigned long targetStm32f4GetUartClockFrequencyHz()
 {
 	// A direct clock from HSI was used
 	return TARGET_STM32F4_HSI_FREQUENCY_HZ;
