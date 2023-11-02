@@ -18,18 +18,19 @@ unsigned long long targetStm32f4GetUartClockFrequencyHz()
 void targetInitializeClock()
 {
 	// Enable HSI clock source
-	RCC->CR |= RCC_CR_HSION;
+	volatile RCC_TypeDef *rcc = RCC;
+	rcc->CR |= RCC_CR_HSION;
 
 	// Busy-wait until HSI is ready
-	while (!(RCC->CR & RCC_CR_HSIRDY)) {
+	while (!(rcc->CR & RCC_CR_HSIRDY)) {
 	}
 
 	// Use HSI as the system clock source
-	RCC->CFGR |= RCC_CFGR_SW_HSI;
+	rcc->CFGR |= RCC_CFGR_SW_HSI;
 
 	// Enable peripherals
-	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;  // Enable GPIO A (USART 2)
-	RCC->AHB2ENR |= RCC_AHB2ENR_RNGEN;  // Enable random number generator
-	RCC->APB1ENR |= RCC_APB1ENR_USART2EN  // Enable USART 2
+	rcc->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;  // Enable GPIO A (USART 2)
+	rcc->AHB2ENR |= RCC_AHB2ENR_RNGEN;  // Enable random number generator
+	rcc->APB1ENR |= RCC_APB1ENR_USART2EN  // Enable USART 2
 		| RCC_APB1ENR_TIM2EN;  // Enable TIM 2
 }
