@@ -7,6 +7,7 @@
 // Implements "target.h" API
 
 #include "stm32f4_target.h"
+#include "stm32f4_timer.h"
 #include <stm32f412cx.h>
 
 #define PLLM_SOURCE_FREQUENCY (TARGET_STM32F4_HSI_FREQUENCY_HZ)
@@ -53,7 +54,12 @@ void targetStm32f4InitializeClock()
 
 void targetStm32F4InitializeTimer()
 {
-	volatile TIM_TypeDef *tim = TIM2;
+	volatile TIM_TypeDef *tim = stm32f4TimerGetTimTypedef();
+	tim->DIER |= TIM_DIER_UIE;  // Enable TIM2 update interrupt
+	tim->CR1 |= TIM_CR1_DIR  // Use as downcounter
+		| TIM_CR1_URS;  // Only get triggered by underflow event
+	// TODO: handle CNT_EN
+	// TODO: handle SR_UIF
 }
 
 void targetUp()
