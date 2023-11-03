@@ -9,7 +9,8 @@
 #define COMMON_HW_TIMER_H_
 
 /// Will be invoked each time the timer's interrupt gets triggered
-typedef void (*HwTimerIsrHook)();
+/// \returns Ticks before next timeout, 0 if timer should be disabled
+typedef unsigned long (*HwTimerIsrHook)();
 
 /// \brief Initializes timer w/ `HwTimerIsrHook` instance
 /// \pre The timer must be pre-initialized for a target
