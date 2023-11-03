@@ -2,3 +2,5 @@
 build/
 .vscode
 *CMakeLists.txt.user
+*.cproject
+*.project
