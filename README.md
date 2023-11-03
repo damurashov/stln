@@ -55,5 +55,3 @@ and then, hopefully, successfully ported onto STM32F412.
 # TODO
 
 - Enable and configure timer
-- Enable and configure RNG
-	- Enable and configure TIMx and RNG priorities to be equal (to spare synchronization expenses)
