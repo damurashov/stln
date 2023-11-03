@@ -8,7 +8,7 @@
 
 #include <stm32f412cx.h>
 
-unsigned long randomGetU32()
+unsigned long randomGetU32FromIsr()
 {
 	return RNG->DR;  // RM0402 Rev 6 p. 411
 }
