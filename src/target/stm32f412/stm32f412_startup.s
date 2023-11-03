@@ -24,6 +24,14 @@ resetIsrTrap:
 defaultIsrHandler:
 	b defaultIsrHandler
 
+
+.section .text.hardfaultHandler
+.type hardfaultHandler, %function
+.align 4
+hardfaultHandler:
+	b hardfaultHandler
+
+
 /*
  * STM32-specific vector table
  *
@@ -39,7 +47,7 @@ gStm32VectorTable:
 	.word gMspInitial
 	.word resetIsr
 	.word NMI_Handler
-	.word HardFault_Handler
+	.word hardfaultHandler
 	.word MemManage_Handler
 	.word BusFault_Handler
 	.word UsageFault_Handler
