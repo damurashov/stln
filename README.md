@@ -57,3 +57,4 @@ and then, hopefully, successfully ported onto STM32F412.
 - Enable and configure timer in counting mode
 - Configure TIM2 ISR priority and USART ISR prioirities to be equal
     - this will allow for safe shared circular buffer mgmt
+- TIM2 ISR
