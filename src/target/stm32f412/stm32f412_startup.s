@@ -88,7 +88,7 @@ gStm32VectorTable:
 	.word TIM1_UP_TIM16_IRQHandler
 	.word TIM1_TRG_COM_TIM17_IRQHandler
 	.word TIM1_CC_IRQHandler
-	.word TIM2_IRQHandler
+	.word tim2Isr
 	.word TIM3_IRQHandler
 	.word TIM4_IRQHandler
 	.word I2C1_EV_IRQHandler
@@ -258,8 +258,8 @@ gStm32VectorTable:
 	.weak TIM1_CC_IRQHandler
 	.thumb_set TIM1_CC_IRQHandler,defaultIsrHandler
 
-	.weak TIM2_IRQHandler
-	.thumb_set TIM2_IRQHandler,defaultIsrHandler
+	.weak tim2Isr
+	.thumb_set tim2Isr,defaultIsrHandler
 
 	.weak TIM3_IRQHandler
 	.thumb_set TIM3_IRQHandler,defaultIsrHandler
