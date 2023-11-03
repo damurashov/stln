@@ -7,7 +7,7 @@
 // Implements "target.h" API
 
 #include "stm32f4_target.h"
-#include "stm32f4_timer.h"
+#include "stm32f4_hw_timer.h"
 #include <stm32f412cx.h>
 
 #define PLLM_SOURCE_FREQUENCY (TARGET_STM32F4_HSI_FREQUENCY_HZ)
