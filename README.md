@@ -33,7 +33,7 @@ Available targets
 - `stm32f411RE`
 - `stm32f412`
 
-Run 
+Run
 
 # Debugging under QEMU
 
@@ -54,4 +54,6 @@ and then, hopefully, successfully ported onto STM32F412.
 
 # TODO
 
-- Enable and configure timer
+- Enable and configure timer in counting mode
+- Configure TIM2 ISR priority and USART ISR prioirities to be equal
+    - this will allow for safe shared circular buffer mgmt
