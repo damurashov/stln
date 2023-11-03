@@ -16,4 +16,6 @@ unsigned long targetStm32f4GetUartClockFrequencyHz();
 
 void targetStm32f4InitializeRng();
 
+void targetStm32F4InitializeTimer();
+
 #endif // TARGET_STM32F4_TARGET_STM32F4_H_

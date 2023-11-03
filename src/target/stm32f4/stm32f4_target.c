@@ -51,8 +51,14 @@ void targetStm32f4InitializeClock()
 		| RCC_APB1ENR_TIM2EN;  // Enable TIM 2
 }
 
+void targetStm32F4InitializeTimer()
+{
+	volatile TIM_TypeDef *tim = TIM2;
+}
+
 void targetUp()
 {
 	targetStm32f4InitializeClock();
 	targetStm32f4InitializeRng();
+	targetStm32F4InitializeTimer();
 }
