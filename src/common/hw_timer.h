@@ -17,6 +17,7 @@ void hwTimerSetIsrHook(HwTimerIsrHook aHwTimerIsrHook);
 
 /// \brief after # `anTicks` the `HwTimerIsrHook` will get triggered (if one
 /// will have been set by the time)
-void hwTimerStartTimeoutTicks(unsigned long anTicks);
+/// \details May be called from either ISR, or thread mode
+void hwTimerStartTimeoutTicksFromIsr(unsigned long anTicks);
 
 #endif // COMMON_HW_TIMER_H_
