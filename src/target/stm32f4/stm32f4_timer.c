@@ -15,7 +15,7 @@ void hwTimerSetIsrHook(HwTimerIsrHook aHwTimerIsrHook)
 	sHwTimerIsrHook = aHwTimerIsrHook;
 }
 
-void hwTimerStartTimeoutTicks(unsigned long anTicks)
+void hwTimerStartTimeoutTicksFromIsr(unsigned long anTicks)
 {
 	volatile TIM_TypeDef *tim = stm32f4TimerGetTimTypedef();
 	tim->ARR = anTicks;  // Set the number of ticks
