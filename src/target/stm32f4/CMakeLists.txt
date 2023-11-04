@@ -17,10 +17,11 @@ stap_build_configuration_append_asmflag("-mthumb")  # Use thumb code
 stap_build_configuration_append_asmflag("-mcpu=cortex-m4")  # Specify CPU architecture
 stap_build_configuration_append_asmflag("-mlittle-endian")
 #stap_build_configuration_append_asmflag("-mfloat-abi=hard")  # The target features FP hardware
-stap_build_configuration_apply_flags_to_target(stm32f4)
 
 if (${BUILD_TYPE} STREQUAL "Debug")
 	stap_build_configuration_append_cflag("-g3")  # The target features FP hardware
 endif()
+
+stap_build_configuration_apply_flags_to_target(stm32f4)
 
 target_include_directories(stm32f4 PUBLIC ${COMMON_INCLUDE_DIRECTORIES})
