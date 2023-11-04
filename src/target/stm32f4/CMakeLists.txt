@@ -4,6 +4,7 @@ target_include_directories(stm32f4 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${COMMON_I
 target_link_libraries(stm32f4 PUBLIC stm32cubef4)
 
 stap_build_configuration_append_linker_flag("-nostartfiles")  # Do not run startup operations, such as setting global variables to their initial values. Do not use default startup files.
+stap_build_configuration_append_linker_flag("-nostdlib")  # Do not run startup operations, such as setting global variables to their initial values. Do not use default startup files.
 stap_build_configuration_append_linker_flag("-Xlinker")  # Garbage-collect sections
 stap_build_configuration_append_linker_flag("--gc-sections")  # Garbage-collect sections
 stap_build_configuration_append_cflag("-mthumb")  # Use thumb code
