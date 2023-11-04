@@ -17,6 +17,10 @@
 #error Unsupported configuration
 #endif  /* PLLM_FREQUENCY_DIVISION_FACTOR */
 
+#define CPACR ((unsigned long *)0xE000ED88)
+#define CPACR_CP10_FULL_ACCESS (0x3 << 20)
+#define CPACR_CP11_FULL_ACCESS (0x3 << 22)
+
 unsigned long targetStm32f4GetUartClockFrequencyHz()
 {
 	// A direct clock from HSI was used
@@ -60,8 +64,15 @@ void targetStm32F4InitializeTimer()
 		| TIM_CR1_URS;  // Only get triggered by underflow event
 }
 
+void targetStm32F4EnableFpu()
+{
+	volatile unsigned long *cpacr = CPACR;
+	*cpacr |= (CPACR_CP10_FULL_ACCESS | CPACR_CP11_FULL_ACCESS);
+}
+
 void targetUp()
 {
+	targetStm32F4EnableFpu();
 	targetStm32f4InitializeClock();
 	targetStm32f4InitializeRng();
 	targetStm32F4InitializeTimer();

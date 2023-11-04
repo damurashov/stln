@@ -18,4 +18,7 @@ void targetStm32f4InitializeRng();
 
 void targetStm32F4InitializeTimer();
 
+/// \brief Enables Floating Point Unit
+void targetStm32F4EnableFpu();
+
 #endif // TARGET_STM32F4_TARGET_STM32F4_H_
