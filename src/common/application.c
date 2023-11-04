@@ -49,6 +49,9 @@ static unsigned long onTimerIsr()
 ApplicationHandle applicationInitialize()
 {
 	ringBufferInitialize(&sApplication.ringBuffer);
+	uartInitialize(ApplicationParameterBaudrate, ApplicationParameterUartWordLength, ApplicationParameterUartStopBits);
+	uartSetIsrHook(onUartIsr);
+	hwTimerSetIsrHook(onTimerIsr);
 
 	return 0;
 }
@@ -56,9 +59,6 @@ ApplicationHandle applicationInitialize()
 void applicationRun(ApplicationHandle *aApplicationHandle)
 {
 	(void)aApplicationHandle;
-	uartInitialize(ApplicationParameterBaudrate, ApplicationParameterUartWordLength, ApplicationParameterUartStopBits);
-	uartSetIsrHook(onUartIsr);
-	hwTimerSetIsrHook(onTimerIsr);
 	unsigned long randomDelay = randomGetU32FromIsr();
 	hwTimerStartTimeoutTicksFromIsr(randomDelay);
 }
