@@ -17,7 +17,7 @@ build:
 	mkdir -p build && \
 		cd build && \
 		cmake -DBUILD_TYPE=$(BUILD_TYPE) -DUSE_STM32F412_TARGET=ON .. && \
-		make -j$$(nproc)
+		VERBOSE=1 make -j$$(nproc)
 	$(SIZE) $(BUILD_ELF_PATH)
 .PHONY: build
 
