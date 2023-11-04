@@ -10,7 +10,7 @@
 
 typedef void *ApplicationHandle;
 
-void *applicationInitialize();
+ApplicationHandle applicationInitialize();
 void applicationRun(ApplicationHandle *aApplicationHandle);
 
 #endif // COMMON_APPLICATION_H

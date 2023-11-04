@@ -46,7 +46,7 @@ static unsigned long onTimerIsr()
 	return nextTimeout;
 }
 
-void *applicationInitialize()
+ApplicationHandle applicationInitialize()
 {
 	ringBufferInitialize(&sApplication.ringBuffer);
 
