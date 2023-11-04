@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.12)
 set(CMAKE_C_STANDARD 99)
 project(usbad)
 enable_language(ASM)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(build_configuration)
 
 # BUILD CONFIGURATION (SUBJECT TO FURTHER OPTIONING)
 
 # Toolchain, and build options
 set(TOOLCHAIN "gcc")
 message(STATUS "Using toolchain: `${TOOLCHAIN}`")
-set(GCC_TOOLCHAIN_PATH_PREFIX "")
 set(GCC_TOOLCHAIN_NAME_PREFIX "arm-none-eabi-")
 set(USE_STM32CUBEF4_LIBRARY ON)
 
@@ -51,3 +52,4 @@ endif()
 
 add_subdirectory(lib)
 add_subdirectory(src)
+stap_build_configuration_apply_flags_to_targets()
