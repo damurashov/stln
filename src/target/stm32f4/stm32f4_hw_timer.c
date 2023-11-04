@@ -10,6 +10,22 @@
 
 static HwTimerIsrHook sHwTimerIsrHook;
 
+void tim2Isr()
+{
+	volatile TIM_TypeDef *tim = stm32f4TimerGetTimTypedef();
+	tim->CR1 &= ~(TIM_CR1_CEN);  // Disable timer
+	tim->SR = 0;  // Reset interrupt flags (UIF, in particular)
+
+	if (sHwTimerIsrHook != 0) {
+		unsigned long nextTimeoutTicks = sHwTimerIsrHook();
+
+		if (nextTimeoutTicks > 0) {
+			tim->ARR = nextTimeoutTicks;
+			tim->CR1 |= TIM_CR1_CEN;  // Enable timer
+		}
+	}
+}
+
 void hwTimerSetIsrHook(HwTimerIsrHook aHwTimerIsrHook)
 {
 	sHwTimerIsrHook = aHwTimerIsrHook;
