@@ -58,8 +58,6 @@ void targetStm32F4InitializeTimer()
 	tim->DIER |= TIM_DIER_UIE;  // Enable TIM2 update interrupt
 	tim->CR1 |= TIM_CR1_DIR  // Use as downcounter
 		| TIM_CR1_URS;  // Only get triggered by underflow event
-	// TODO: handle CNT_EN
-	// TODO: handle SR_UIF
 }
 
 void targetUp()
