@@ -16,6 +16,7 @@ enum ApplicationParameter {
 	ApplicationParameterBaudrate = 115200,
 	ApplicationParameterUartWordLength = UartWordLength8Bit,
 	ApplicationParameterUartStopBits = UartStopBitLength1,
+	ApplicationParameterMaxTimerDelayMs = 1000U,
 };
 
 struct {
@@ -34,6 +35,11 @@ static unsigned long onTimerIsr()
 {
 	const unsigned char nextChar = (unsigned char)randomGetU32FromIsr();
 	unsigned long nextTimeout = randomGetU32FromIsr();
+	const unsigned long timerCounterFrequency = hwTimerGetCounterFrequency();
+	const unsigned long timerTickValueUpperBound = timerCounterFrequency / 1000U * ApplicationParameterMaxTimerDelayMs;
+
+	// Scale next timeout, so we won't have to wait for too long
+	nextTimeout %= timerTickValueUpperBound;
 
 	// Ensure the stream never stops
 	if (nextTimeout == 0U) {
@@ -59,6 +65,5 @@ ApplicationHandle applicationInitialize()
 void applicationRun(ApplicationHandle *aApplicationHandle)
 {
 	(void)aApplicationHandle;
-	unsigned long randomDelay = randomGetU32FromIsr();
-	hwTimerStartTimeoutTicksFromIsr(randomDelay);
+	hwTimerStartTimeoutTicksFromIsr(42);  // Initial boot
 }
