@@ -8,15 +8,15 @@
 
 #include "stm32f4_target.h"
 #include "uart.h"
+#include "stm32f4_uart.h"
 #include <stm32f412cx.h>  // Not supposed to matter which platform is used within F4 lineage
 
 static UartIsrHook sUartIsrHook = 0;
-static USART_TypeDef *sUsartRegisters = USART2;
 
 /// \brief Overrides `stm32f412_startup.s`
 void gUsart2Isr()
 {
-	USART_TypeDef *usart = sUsartRegisters;
+	USART_TypeDef *usart = stm32f4UartGetTypeDef();
 	unsigned char nextCharacter;
 
 	if (sUartIsrHook != 0 && sUartIsrHook(&nextCharacter)) {
@@ -31,7 +31,7 @@ void gUsart2Isr()
 /// \pre UART2 is supposed to be enabled in CCR
 void uartInitialize(unsigned long aBaudrate, unsigned aUartWordLength, unsigned aUartStopBitLength)
 {
-	volatile USART_TypeDef *usart = sUsartRegisters;
+	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
 	usart->CR1 |= USART_CR1_TXEIE;  // Enable "TX empty" interrupt
 
 	// Configure word length
@@ -80,14 +80,14 @@ void uartSetIsrHook(UartIsrHook aUartIsrHook)
 
 void uartEnableFromIsr()
 {
-	volatile USART_TypeDef *usart = sUsartRegisters;
+	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
 	usart->CR1 |= USART_CR1_TXEIE  // Enable transmission
 		| USART_CR1_TE;  // Enable usart interrupt on empty transmission buffer
 }
 
 void uartDisableFromIsr()
 {
-	volatile USART_TypeDef *usart = sUsartRegisters;
+	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
 	usart->CR1 &= ~(USART_CR1_TXEIE  // Enable transmission
 		| USART_CR1_TE);  // Enable usart interrupt on empty transmission buffer
 }
