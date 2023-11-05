@@ -82,6 +82,7 @@ void targetStm32f4InitializeUart()
 	volatile GPIO_TypeDef *gpio = GPIOA;
 
 	rcc->APB2ENR |= RCC_APB2ENR_USART1EN;  // Enable USART 1
+	usart->CR1 |= USART_CR1_UE;
 
 	// Initialize USART-related GPIOs
 	gpio->MODER |= GPIO_MODER_MODE15_1;  // PA15, AF mode
