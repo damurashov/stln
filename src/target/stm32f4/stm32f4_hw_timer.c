@@ -7,6 +7,7 @@
 
 #include "hw_timer.h"
 #include "stm32f4_hw_timer.h"
+#include "stm32f4_target.h"
 
 static HwTimerIsrHook sHwTimerIsrHook;
 
@@ -20,8 +21,7 @@ void tim2Isr()
 		unsigned long nextTimeoutTicks = sHwTimerIsrHook();
 
 		if (nextTimeoutTicks > 0) {
-			tim->ARR = nextTimeoutTicks;
-			tim->CR1 |= TIM_CR1_CEN;  // Enable timer
+			hwTimerStartTimeoutTicksFromIsr(nextTimeoutTicks);
 		}
 	}
 }
@@ -31,9 +31,15 @@ void hwTimerSetIsrHook(HwTimerIsrHook aHwTimerIsrHook)
 	sHwTimerIsrHook = aHwTimerIsrHook;
 }
 
-void hwTimerStartTimeoutTicksFromIsr(unsigned long anTicks)
+void hwTimerStartTimeoutTicksFromIsr(unsigned long aNextTimeoutTicks)
 {
 	volatile TIM_TypeDef *tim = stm32f4TimerGetTimTypedef();
-	tim->ARR = anTicks;  // Set the number of ticks
-	tim->CR1 |= TIM_CR1_CEN;  // Enable counting
+	tim->ARR = aNextTimeoutTicks;
+	tim->CNT = aNextTimeoutTicks;  // The CNT is reloaded w/ ARR on TIMx UI, but it is unclear whether it happens before, or after UI. Ensure consistency
+	tim->CR1 |= TIM_CR1_CEN;  // Enable timer
+}
+
+unsigned long hwTimerGetCounterFrequency()
+{
+	return targetStm32f4GetTimerClockFrequencyHz();  // The timer's prescaler was not set
 }
