@@ -12,7 +12,7 @@
 
 static inline USART_TypeDef *stm32f4UartGetTypeDef()
 {
-	return USART2;
+	return USART1;
 }
 
 #endif // TARGET_STM32F4_STM32F4_UART_H_
