@@ -19,10 +19,12 @@ void usart1Isr()
 	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
 	unsigned char nextCharacter;
 
-	if (sUartIsrHook != 0 && sUartIsrHook(&nextCharacter)) {
-		usart->DR = nextCharacter;
-	} else {
-		uartDisableFromIsr();
+	if (usart->SR & USART_SR_TXE) {
+		if (sUartIsrHook && sUartIsrHook(&nextCharacter)) {
+			usart->DR = nextCharacter;  // Writing to DR resets SR_TXE and SR_TC (when the latter follows read from SR) flags
+		} else {
+			uartDisableFromIsr();
+		}
 	}
 }
 
