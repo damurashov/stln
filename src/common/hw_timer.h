@@ -21,4 +21,7 @@ void hwTimerSetIsrHook(HwTimerIsrHook aHwTimerIsrHook);
 /// \details May be called from either ISR, or thread mode
 void hwTimerStartTimeoutTicksFromIsr(unsigned long anTicks);
 
+/// \brief Returns hardware timer counting frequency.
+unsigned long hwTimerGetCounterFrequency();
+
 #endif // COMMON_HW_TIMER_H_
