@@ -97,7 +97,7 @@ gStm32VectorTable:
 	.word I2C2_ER_IRQHandler
 	.word SPI1_IRQHandler
 	.word SPI2_IRQHandler
-	.word USART1_IRQHandler
+	.word usart1Isr
 	.word gUsart2Isr
 	.word USART3_IRQHandler
 	.word EXTI15_10_IRQHandler
