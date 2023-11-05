@@ -22,6 +22,13 @@
 #define CPACR_CP10_FULL_ACCESS (0x3 << 20)
 #define CPACR_CP11_FULL_ACCESS (0x3 << 22)
 
+#define TIM2_PRIORITY (50)
+#define USART1_PRIORITY (50)
+
+#if TIM2_PRIORITY != USART1_PRIORITY
+#error Misconfiguration detected: TIM2 and USART1 priorities must be equal to enable daisy-chaining and thus ensure mutual exclusion while working with a circular buffer. See also "application.c".
+#endif
+
 unsigned long targetStm32f4GetUartClockFrequencyHz()
 {
 	// A direct clock from HSI was used
@@ -99,4 +106,6 @@ void targetUp()
 	targetStm32F4InitializeTimer();
 	NVIC_EnableIRQ(TIM2_IRQn);
 	NVIC_EnableIRQ(USART1_IRQn);
+	NVIC_SetPriority(USART1_IRQn, USART1_PRIORITY);
+	NVIC_SetPriority(TIM2_IRQn, TIM2_PRIORITY);
 }
