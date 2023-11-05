@@ -34,7 +34,6 @@ void usart1Isr()
 void uartInitialize(unsigned long aBaudrate, unsigned aUartWordLength, unsigned aUartStopBitLength)
 {
 	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
-	usart->CR1 |= USART_CR1_TXEIE;  // Enable "TX empty" interrupt
 
 	// Configure word length
 	if (aUartWordLength == UartWordLength9Bit) {
@@ -83,13 +82,14 @@ void uartSetIsrHook(UartIsrHook aUartIsrHook)
 void uartEnableFromIsr()
 {
 	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
-	usart->CR1 |= USART_CR1_TXEIE  // Enable transmission
-		| USART_CR1_TE;  // Enable usart interrupt on empty transmission buffer
+	usart->SR &= ~(USART_SR_TC);
+	usart->CR1 |= USART_CR1_TXEIE  // Enable "Transfer register empty" interrupt
+		| USART_CR1_TE;  // Enable transmitter
 }
 
 void uartDisableFromIsr()
 {
 	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
-	usart->CR1 &= ~(USART_CR1_TXEIE  // Enable transmission
-		| USART_CR1_TE);  // Enable usart interrupt on empty transmission buffer
+	usart->CR1 &= ~(USART_CR1_TXEIE  // disable "TX empty" interrupt
+		| USART_CR1_TE);  // disable transmitter
 }
