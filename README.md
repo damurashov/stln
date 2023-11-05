@@ -51,11 +51,3 @@ release. So this project can be debugged w/ QEMU on a
 [close enough](https://www.st.com/en/microcontrollers-microprocessors/stm32f4-series.html)
 STM32F411RE
 and then, hopefully, successfully ported onto STM32F412.
-
-# TODO
-
-- Enable and configure timer in counting mode
-- Configure TIM2 ISR priority and USART ISR prioirities to be equal
-    - this will allow for safe shared circular buffer mgmt
-- TIM2 ISR
-- Configure GPIO AF for USART2
