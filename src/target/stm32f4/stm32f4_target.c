@@ -6,8 +6,9 @@
 //
 // Implements "target.h" API
 
-#include "stm32f4_target.h"
 #include "stm32f4_hw_timer.h"
+#include "stm32f4_target.h"
+#include "stm32f4_uart.h"
 #include <stm32f412cx.h>
 
 #define PLLM_SOURCE_FREQUENCY (TARGET_STM32F4_HSI_FREQUENCY_HZ)
@@ -53,7 +54,6 @@ void targetStm32f4InitializeClock()
 	rcc->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;  // Enable GPIO A (USART 2)
 	rcc->AHB2ENR |= RCC_AHB2ENR_RNGEN;  // Enable random number generator
 	rcc->APB1ENR |= RCC_APB1ENR_TIM2EN;  // Enable TIM 2
-	rcc->APB2ENR |= RCC_APB2ENR_USART1EN;  // Enable USART 1
 }
 
 void targetStm32F4InitializeTimer()
@@ -75,12 +75,27 @@ unsigned long targetStm32f4GetTimerClockFrequencyHz()
 	return TARGET_STM32F4_HSI_FREQUENCY_HZ;  // Timers are clocked directly from HSI, no downstream APB1 prescalers were used
 }
 
+void targetStm32f4InitializeUart()
+{
+	volatile RCC_TypeDef *rcc = RCC;
+	volatile USART_TypeDef *usart = stm32f4UartGetTypeDef();
+	volatile GPIO_TypeDef *gpio = GPIOA;
+
+	rcc->APB2ENR |= RCC_APB2ENR_USART1EN;  // Enable USART 1
+
+	// Initialize USART-related GPIOs
+	gpio->MODER |= GPIO_MODER_MODE15_1;  // PA15, AF mode
+	gpio->PUPDR |= GPIO_PUPDR_PUPD15_0;  // PA15, pull-up
+	gpio->AFR[1] |= (7 << 28);  // PA15, AF7
+}
+
 void targetUp()
 {
 	targetStm32F4EnableFpu();
 	targetStm32f4InitializeClock();
-	NVIC_EnableIRQ(TIM2_IRQn);
-	NVIC_EnableIRQ(USART2_IRQn);
+	targetStm32f4InitializeUart();
 	targetStm32f4InitializeRng();
 	targetStm32F4InitializeTimer();
+	NVIC_EnableIRQ(TIM2_IRQn);
+	NVIC_EnableIRQ(USART2_IRQn);
 }
