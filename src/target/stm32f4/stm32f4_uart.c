@@ -66,9 +66,9 @@ void uartInitialize(unsigned long aBaudrate, unsigned aUartWordLength, unsigned 
 		const float usartDivf = ((float)targetStm32f4GetUartClockFrequencyHz())
 			/ (8 * (2 - useOversampling8) * aBaudrate);
 		const unsigned long mantissa = (unsigned long)usartDivf;
-		const float fractionCoefficientMultiplierf = 16.0f;
-		const unsigned long long fraction = (unsigned long long)(fractionCoefficientMultiplierf
-			* (usartDivf - (float)mantissa));
+		const float fractionCoefficientMultiplierf = 16.0f;  // See the doc.
+		const float fractionf = usartDivf - (float)mantissa;  // The actual fraction
+		const unsigned long fraction = (unsigned long)(fractionCoefficientMultiplierf * fractionf);  // To machnine representation
 		usart->BRR = (mantissa << 4) | fraction;
 	}
 }
