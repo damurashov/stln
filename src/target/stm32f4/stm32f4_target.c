@@ -93,7 +93,6 @@ void targetStm32f4InitializeUart()
 
 	// Initialize USART-related GPIOs
 	gpio->MODER |= GPIO_MODER_MODE9_1;  // PA9, AF mode
-	gpio->PUPDR |= GPIO_PUPDR_PUPD9_0;  // PA9, pull-up
 	gpio->AFR[1] |= (7 << 4);  // PA9, AF7
 }
 
