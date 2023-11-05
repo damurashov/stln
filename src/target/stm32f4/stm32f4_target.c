@@ -85,9 +85,9 @@ void targetStm32f4InitializeUart()
 	usart->CR1 |= USART_CR1_UE;
 
 	// Initialize USART-related GPIOs
-	gpio->MODER |= GPIO_MODER_MODE15_1;  // PA15, AF mode
-	gpio->PUPDR |= GPIO_PUPDR_PUPD15_0;  // PA15, pull-up
-	gpio->AFR[1] |= (7 << 28);  // PA15, AF7
+	gpio->MODER |= GPIO_MODER_MODE9_1;  // PA9, AF mode
+	gpio->PUPDR |= GPIO_PUPDR_PUPD9_0;  // PA9, pull-up
+	gpio->AFR[1] |= (7 << 4);  // PA9, AF7
 }
 
 void targetUp()
