@@ -10,7 +10,7 @@ The application makes use of
 
 TIM2's counter gets initialized w/ random value, and when its interrupt is
 triggered, it puts a random character into a circular buffer, and enables
-USART1 for further processing. USART1, in turns, spews the bytes from the
+USART1 for further processing. USART1, in turn, spews the bytes from the
 buffer into PA9 (see `usart1Isr`) at a pre-configured baudrate (see
 `uartInitialize`) from the buffer, or gets disabled, if the buffer is empty.
 
