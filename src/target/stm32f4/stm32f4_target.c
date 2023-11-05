@@ -97,5 +97,5 @@ void targetUp()
 	targetStm32f4InitializeRng();
 	targetStm32F4InitializeTimer();
 	NVIC_EnableIRQ(TIM2_IRQn);
-	NVIC_EnableIRQ(USART2_IRQn);
+	NVIC_EnableIRQ(USART1_IRQn);
 }
