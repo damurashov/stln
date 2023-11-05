@@ -59,15 +59,20 @@ void targetStm32f4InitializeClock()
 void targetStm32F4InitializeTimer()
 {
 	volatile TIM_TypeDef *tim = stm32f4TimerGetTimTypedef();
-	tim->DIER |= TIM_DIER_UIE;  // Enable TIM2 update interrupt
 	tim->CR1 |= TIM_CR1_DIR  // Use as downcounter
-		| TIM_CR1_URS;  // Only get triggered by underflow event
+		| TIM_CR1_ARPE;  // Enable auto-reload preload
+	tim->DIER |= TIM_DIER_UIE;  // Enable TIM2 update interrupt
 }
 
 void targetStm32F4EnableFpu()
 {
 	volatile unsigned long *cpacr = CPACR;
 	*cpacr |= (CPACR_CP10_FULL_ACCESS | CPACR_CP11_FULL_ACCESS);
+}
+
+unsigned long targetStm32f4GetTimerClockFrequencyHz()
+{
+	return TARGET_STM32F4_HSI_FREQUENCY_HZ;  // Timers are clocked directly from HSI, no downstream APB1 prescalers were used
 }
 
 void targetUp()

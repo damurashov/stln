@@ -14,6 +14,9 @@
 /// \brief returns UART clock frequency as it is configured in RCC
 unsigned long targetStm32f4GetUartClockFrequencyHz();
 
+/// \brief returns clocking frequencies for all (WARN) HW timers
+unsigned long targetStm32f4GetTimerClockFrequencyHz();
+
 void targetStm32f4InitializeRng();
 
 void targetStm32F4InitializeTimer();
