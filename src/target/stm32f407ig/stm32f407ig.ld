@@ -2,7 +2,7 @@
 
 MEMORY {
 	FLASH(rx) : ORIGIN = 0x08000000, LENGTH = 1024K
-	SRAM(rwx) : ORIGIN = 0x20000000, LENGTH = 196K
+	SRAM(rwx) : ORIGIN = 0x20000000, LENGTH = 128K
 }
 
 PROVIDE(gMspInitial = ORIGIN(SRAM) + LENGTH(SRAM));  /* Initial value for the MSP (main stack pointer) */
