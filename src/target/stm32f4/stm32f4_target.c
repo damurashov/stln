@@ -74,6 +74,8 @@ void targetUp()
 {
 	targetStm32F4EnableFpu();
 	targetStm32f4InitializeClock();
+	NVIC_EnableIRQ(TIM2_IRQn);
+	NVIC_EnableIRQ(USART2_IRQn);
 	targetStm32f4InitializeRng();
 	targetStm32F4InitializeTimer();
 }
