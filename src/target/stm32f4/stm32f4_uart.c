@@ -14,7 +14,7 @@
 static UartIsrHook sUartIsrHook = 0;
 
 /// \brief Overrides `stm32f412_startup.s`
-void gUsart2Isr()
+void usart1Isr()
 {
 	USART_TypeDef *usart = stm32f4UartGetTypeDef();
 	unsigned char nextCharacter;
