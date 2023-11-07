@@ -12,12 +12,20 @@ OBJDUMP = arm-none-eabi-objdump
 OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
+# "Use-target-name" flags. Format: USE_<TARGET_NAME>_TARGET
+
+USE_STM32F412_TARGET ?= OFF
+USE_STM32F407IG_TARGET ?= OFF
+
 # Default build target
 build:
 	mkdir -p build && \
 		cd build && \
-		cmake -DBUILD_TYPE=$(BUILD_TYPE) -DUSE_STM32F407IG_TARGET=ON .. && \
-		VERBOSE=1 make -j$$(nproc)
+		cmake -DBUILD_TYPE=$(BUILD_TYPE) \
+		-DUSE_STM32F412_TARGET=$(USE_STM32F412_TARGET) \
+		-DUSE_STM32F407IG_TARGET=$(USE_STM32F407IG_TARGET) \
+		.. && \
+		make -j$$(nproc)
 	$(SIZE) $(BUILD_ELF_PATH)
 .PHONY: build
 
